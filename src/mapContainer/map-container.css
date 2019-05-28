@@ -1,0 +1,4 @@
+.list-view {
+    display: flex;
+flex-wrap: nowrap;
+}
