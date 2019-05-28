@@ -8,10 +8,35 @@ import { mapDarkStyle } from './mapDarkStyle'
 import { venues } from './venues'
 import './map-container.css'
 class MapContainer extends Component {
-  state = {
-    venues: venues
-  }
+    constructor(props) {
+        super();
+        this.state = {
+    venues: venues,
+    map:"",
+        marker:"",
+        markerArray:[]
+  }}
+  filterMarker = (filteredList) => {
+    let listArray = filteredList.map( (object) => object.place_id );
+    let markers = this.state.markerArray;
+    for (let l = 0; l < markers.length; l++ ){
+      if (listArray.includes(markers[l].id) ) {
+      markers[l].marker.setVisible(true);
+      window.google.maps.event.trigger(markers[l].marker, 'click');
+    }
+    else {markers[l].marker.setVisible(false);
+    }}
+  };
 
+  clickedMarker = (name, id) => {
+    let marker = this.state.markerArray;
+    for ( let m=0; m < marker.length; m++){
+      if (marker[m].id === id)
+      {
+        window.google.maps.event.trigger(marker[m].marker, 'click');
+      }
+    }
+  }
   
   
   render() {
@@ -23,7 +48,7 @@ class MapContainer extends Component {
           <h1 className="text-capitalize text-center green-text mt-4">
           London's Venues
           </h1>
-          <ListView venues={this.state.venues} />
+          <ListView venues={this.state.venues} clickedMarker={this.clickedMarker} filterMarker={this.filterMarker} />
           
           </div>
           <div className="col-md-8">
