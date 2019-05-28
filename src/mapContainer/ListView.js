@@ -3,6 +3,8 @@ import React, { Component } from "react";
 import escapeRegExp from "escape-string-regexp";
 import sortBy from "sort-by";
 
+import './ListView.css';
+
 class ListView extends Component {
     state = {
         query: ""
@@ -23,7 +25,7 @@ class ListView extends Component {
         let showingVenues;
         if (query) {
             const match = new RegExp(escapeRegExp(this.state.query), "i");
-            showingVenues = contacts.filter(venue => match.test(venue.name));
+            showingVenues = venues.filter(venue => match.test(venue.name));
         } else {
             showingVenues = venues;
         }
@@ -63,21 +65,35 @@ class ListView extends Component {
               </div>
             )}
     
-            <div className="container">
+            <div className="container ">
               <div className="row">
                 {showingVenues.map(venue => (
                   <li key="{venue.place_id}">
                     <div className="card">
+                    <img className="card-img-top img-top" src={"http://placehold.it/400x20&text=slide1"} alt="Card cap" />
                       <div className="card-body">
-                        <h2 className="card-title mb-2 green-text">{venue.name}</h2>
+                        <h2 className="card-title  green-text">{venue.name}</h2>
                         <p className=" mt-3 mb-2 grey-text card-text">
-                          {venue.price_level}
-                        </p>
-                        <p className="card-text mb-2 grey-text">
+                         
                           {venue.vicinity}
                         </p>
                       </div>
-                    </div>
+                      <ul className="list-group list-group-flush">
+                        <li className="list-group-item">{venue.price_level}</li>
+                        <li className="list-group-item">{venue.rating}</li>
+                        <li className="list-group-item">{venue.user_ratings_total}</li>
+                      </ul>
+                  
+                  
+                    
+                    <div className="card-body">
+                    
+                      <a href="{venue.icon}" className="card-link">Card link</a>
+                       </div>
+                    <div className="card-body">
+                    <a href="#" className="btn btn-primary">Go somewhere</a>
+                    <a href="#" className="btn btn-secondary">Go somewhere</a>
+                    </div></div>
                   </li>
                 ))}
               </div>

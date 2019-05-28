@@ -1,4 +1,5 @@
-export const venues = [{
+export const venues = [
+    {
         "geometry": {
             "location": {
                 "lat": 51.46522199999999,
