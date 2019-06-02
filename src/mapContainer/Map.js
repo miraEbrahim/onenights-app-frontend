@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { GoogleKey } from './mapData'
-import { render } from 'react-dom';
 
 class Map extends Component {
   constructor(props) {

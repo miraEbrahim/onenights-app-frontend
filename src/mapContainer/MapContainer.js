@@ -1,12 +1,13 @@
 import React, { Component } from "react";
-import { render } from 'react-dom';
 
 import ListView from "./ListView";
 import Map from './Map';
 import { Putney } from './mapData';
-import { mapDarkStyle } from './mapDarkStyle'
-import { venues } from './venues'
+import { venues } from '../Venues/venues'
+import { mapDarkStyle } from './mapDarkStyle';
 import './map-container.css'
+
+
 class MapContainer extends Component {
     constructor(props) {
         super();
@@ -56,17 +57,18 @@ class MapContainer extends Component {
         id="myMap"
         options={{
           center: Putney,
+          styles: mapDarkStyle,
           zoom: 13
         }}
         onMapLoad={map => {
           
           //InfoWindo & Markers
       const  infowindow =  new window.google.maps.InfoWindow({});
-      let   marker, count;
+      let   marker, i;
       let markerArray = [];
-      for (count = 0; count < venues.length; count++) {
+      for (i = 0; i < venues.length; i++) {
           marker = new window.google.maps.Marker({
-            position: new window.google.maps.LatLng(venues[count].geometry.location.lat, venues[count].geometry.location.lng),
+            position: new window.google.maps.LatLng(venues[i].geometry.location.lat, venues[i].geometry.location.lng),
             icon: {
               path: window.google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
               scale: 5,
@@ -74,14 +76,14 @@ class MapContainer extends Component {
             },
             animation: window.google.maps.Animation.DROP,
             map: map,
-            title: this.state.venues[count].name
+            title: this.state.venues[i].name
           });
-          window.google.maps.event.addListener(marker, 'click', (function (marker, count) {
+          window.google.maps.event.addListener(marker, 'click', (function (marker, i) {
             return function () {
               infowindow.setContent(
                 `<div tabIndex="0" class="infoWindow">
-                    <h4>${venues[count].name}</h4>
-                    <p>${venues[count].vicinity}</p>
+                    <h4>${venues[i].name}</h4>
+                    <p>${venues[i].vicinity}</p>
                     
                   
                   </div>
@@ -90,8 +92,8 @@ class MapContainer extends Component {
               infowindow.open(map,marker, marker.setAnimation(window.google.maps.Animation.BOUNCE));//Add the aniamtion when the marker is clicked
               setTimeout(() => {marker.setAnimation(null);}, 400)
             };
-          })(marker, count));
-          markerArray.push({id: venues[count].place_id, marker: marker});
+          })(marker, i));
+          markerArray.push({id: venues[i].place_id, marker: marker});
         };
         this.setState({markerArray: markerArray});
         }}

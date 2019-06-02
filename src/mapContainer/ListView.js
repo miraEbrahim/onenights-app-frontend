@@ -26,11 +26,7 @@ class ListView extends Component {
          this.listItem(target,e)
        }
      }
-    componentWillMount () {
     
-        let newFilteredData = this.state.filtered;
-        
-    }
 
     render (){
         return (
