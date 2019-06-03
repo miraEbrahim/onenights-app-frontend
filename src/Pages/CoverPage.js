@@ -10,17 +10,22 @@ function CoverPage() {
     <div className="inner">
       <h3 className="masthead-brand">One Nights </h3>
       <nav className="nav nav-masthead justify-content-center">
+      {/* eslint-disable-next-line  */}
         <a className="nav-link active" href="#">الرئيسية</a>
+        {/* eslint-disable-next-line  */}
         <a className="nav-link" href="#">Features</a>
+        {/* eslint-disable-next-line  */}
         <a className="nav-link" href="#">Contact</a>
       </nav>
     </div>
   </header>
 
   <main role="main" className="inner cover pt-5 mt-5">
+      
     <h1 className="cover-heading">Cover your page.</h1>
     <p className="lead pt-4">Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.</p>
     <p className="lead pt-5">
+      {/* eslint-disable-next-line  */}
       <a href="#" className="btn btn-lg btn-secondary">Learn more</a>
     </p>
   </main>
